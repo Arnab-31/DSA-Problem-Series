@@ -1,0 +1,20 @@
+Question Link: https://practice.geeksforgeeks.org/problems/bit-difference-1587115620/1#\
+
+Solution: 
+
+int countBitsFlip(int a, int b){
+    
+    // Your logic here
+    long long int c = a^b;
+    int count=0;
+    while(c!=0)
+    {
+        long long int d;
+        d=c-1;
+        c=c&d;
+        count++;
+    }
+    
+    return count;
+    
+}
