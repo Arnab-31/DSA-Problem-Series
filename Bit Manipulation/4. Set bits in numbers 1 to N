@@ -1,0 +1,24 @@
+Question link: https://practice.geeksforgeeks.org/problems/count-total-set-bits-1587115620/1#
+
+
+Solution: 
+
+int countSetBits(int n)
+{
+    int count=0;
+    
+    int i=2,j=1;
+    int m=n;
+    while(m!=0){
+        count = count + (((n+1)/i) * j);
+        int rem = (n+1)%i;
+        if(rem>(i/2)){
+            count = count + (rem-(i/2));
+        }
+        i=i*2;
+        j=j*2;
+        m=m/2;
+    }
+    
+    return count;
+}
