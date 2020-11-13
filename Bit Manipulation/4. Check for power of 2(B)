@@ -1,0 +1,14 @@
+Question Link: https://practice.geeksforgeeks.org/problems/power-of-2-1587115620/1
+
+Solution: 
+
+bool isPowerofTwo(long long n){
+    
+    long long t = n-1;
+    n=n&t;
+    if(n==0)
+        return true;
+    else
+        return false;
+    
+}
