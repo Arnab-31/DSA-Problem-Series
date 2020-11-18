@@ -1,0 +1,30 @@
+Question Link: https://practice.geeksforgeeks.org/problems/power-set4302/1#
+
+Solution: 
+
+class Solution{
+	public:
+		vector<string> AllPossibleStrings(string s)
+		{
+		    vector <string> str;
+		    int l = s.length();
+            long long int slen = pow(2,l);
+        
+            for(long long int i=1;i<slen;i++)
+            {
+                long long int j=i;
+                int c=0;
+                string a;
+                while((1<<c)<=j)
+                {
+                    if(j&(1<<c))
+                        a.push_back(s[c]);
+                    c++;
+                }
+                str.push_back(a);
+            }
+            
+            sort(str.begin(), str.end());
+            return str;
+		}
+};
