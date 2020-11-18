@@ -1,0 +1,24 @@
+Question link : https://www.geeksforgeeks.org/calculate-square-of-a-number-without-using-and-pow/#:~:text=Given%20an%20integer%20n%2C%20calculate,*%2C%20%2F%20and%20pow().&text=A%20Simple%20Solution%20is%20to%20repeatedly%20add%20n%20to%20result.
+
+Solution: 
+
+#include <stdio.h>
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+int sum(int a, int b)       //sum of b times of a
+{   
+    if(b==1)
+        return a;
+    
+    return sum(a,(b>>1)) + sum(a,(b-(b>>1)));   //  >> is used to divide by 2
+}
+
+int main() {
+    int n;
+    cin>>n;
+	cout<<sum(n,n);
+	return 0;
+}
