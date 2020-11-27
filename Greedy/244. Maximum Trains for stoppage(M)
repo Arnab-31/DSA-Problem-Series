@@ -1,0 +1,51 @@
+Question: https://www.geeksforgeeks.org/maximum-trains-stoppage-can-provided/
+
+Solution: 
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+struct Train{
+int arr,dep;
+};
+
+bool sortingOrder(Train a, Train b){
+return (a.dep < b.dep);
+}
+
+int main()
+{
+    int n,m;       //n platforms m trains
+    cin>>n>>m;
+    vector <vector <Train>> T(m);
+    for(int i=0;i<m;i++)
+    {
+        int a,b,c;
+        cin>>a>>b>>c;
+        Train temp;
+        temp.arr=a;
+        temp.dep=b;
+        T[c].push_back(temp);
+    }
+
+    for(int i=1;i<=n;i++){
+        sort(T[i].begin(),T[i].end(),sortingOrder);
+    }
+
+    int max=0;
+    int lastDep;
+    for(int i=1;i<=n;i++){
+        max++;
+        lastDep=T[i][0].dep;
+        for(int j=1;j<T[i].size();j++){
+            if(T[i][j].arr > lastDep){
+                max++;
+                lastDep=T[i][j].dep;
+            }
+        }
+    }
+
+    cout<<"Maximum Stopped Trains = "<<max;
+    return 0;
+}
