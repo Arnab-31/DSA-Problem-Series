@@ -1,0 +1,41 @@
+Question: https://www.geeksforgeeks.org/buy-maximum-stocks-stocks-can-bought-th-day/
+
+
+Solution: 
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int n,k;
+    cin>>n>>k;
+    vector <pair<int,int>> S;
+
+    for(int i=1;i<=n;i++)
+    {
+        int a;
+        cin>>a;
+        S.push_back(make_pair(a,i));
+    }
+    sort(S.begin(),S.end());     //sorting stocks in ascending order of price
+    
+    int ans = 0;
+    for(int i=0;i<n;i++){
+        if(k < S[i].first)       //if money left is less than the price then we exit   
+            break;
+        if(S[i].first * S[i].second <=k){
+            ans = ans + S[i].second;
+            k=k-(S[i].first * S[i].second);
+        }else{
+            int a = k/S[i].first;
+            ans = ans + a;
+            k=k - (a * (S[i].first));
+        }
+        
+
+    }
+    cout<<ans;
+    return 0;
+}
