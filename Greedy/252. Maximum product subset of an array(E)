@@ -1,0 +1,46 @@
+Question: https://www.geeksforgeeks.org/maximum-product-subset-array/
+
+Solution: 
+TC: O(n)
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int n;
+    cin>>n;
+    int A[100];
+    for(int i=0;i<n;i++)
+        cin>>A[i];
+
+
+    int posProd=1,negNum=0,negProd=1,maxNeg=INT_MIN,zeroNum=0;
+
+
+    for(int i=0;i<n;i++){
+        if(A[i]>0)
+            posProd = posProd * A[i];
+        else if(A[i]<0){
+            negNum++;
+            negProd = negProd * A[i];
+            if(A[i]>maxNeg)
+                maxNeg=A[i];
+        }else
+            zeroNum++;
+    }
+
+    if((negNum==1 && (zeroNum+1)==n) || zeroNum==n )
+        cout<<0;
+    else{
+        if(negNum % 2==0)
+            cout<<posProd * negProd;
+        else
+            cout<<posProd * (negProd/maxNeg);
+    }
+
+
+    return 0;
+}
