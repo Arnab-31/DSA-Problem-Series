@@ -1,0 +1,35 @@
+Question: https://practice.geeksforgeeks.org/problems/chocolate-distribution-problem/0#
+
+Solution: 
+TC: O(nlogn)
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	//code
+	long long int t;
+	cin>>t;
+	
+	while(t--){
+	    long long int n;
+	    cin>>n;
+	    long long int A[n];
+	    
+	    for(long long int i=0;i<n;i++){
+	        cin>>A[i];
+	    }
+	    
+	    long long int m,min=1000000;
+	    cin>>m;
+	    
+	    sort(A,A+n);
+	    for(long long int i=0;i+m-1<n;i++)
+	    {
+	        if((A[i+m-1]-A[i])<min)
+	            min = A[i+m-1]-A[i];
+	    }
+	    cout<<min<<endl;
+	}
+	return 0;
+}
