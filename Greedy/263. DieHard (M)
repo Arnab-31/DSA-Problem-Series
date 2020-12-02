@@ -1,0 +1,98 @@
+Question: https://www.spoj.com/problems/DIEHARD/
+
+Solution: 
+TC - O(n)
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+pair<int,int> fire (int h,int a){
+    return make_pair(h-20, a+5);
+};
+
+pair<int,int> water (int h,int a){
+    return make_pair(h-5, a-10);
+};
+
+pair<int,int> air (int h,int a){
+    return make_pair(h+3, a+2);
+};
+
+int main()
+{
+    int t;
+    cin>>t;
+
+    while(t--){
+        int h,a;
+        cin>>h>>a;
+
+
+        int current = 1;
+        int units = 0;
+        while(h > 0 && a > 0)
+        {
+            pair<int, int> nw;
+            pair<int, int> na;
+            int NW,NA;
+            if(current == 1)
+            {
+                nw = water(h,a);
+                NW = 2;
+                na = air(h,a);
+                NA = 3;
+            }
+            else if(current == 2)
+            {
+                nw = fire(h,a);
+                NW = 1;
+                na = air(h,a);
+                NA = 3;
+            }else
+            {
+                nw = fire(h,a);
+                NW = 1;
+                na = water(h,a);
+                NA = 2;
+
+            }
+
+            if((nw.first <= 0 || nw.second <= 0) &&  (na.first <= 0 || na.second <= 0))
+                break;
+
+            units++;
+            if(nw.first <=0 || nw.second <= 0)
+            {
+                h = na.first;
+                a = na.second;
+                current = NA;
+                continue;
+            }
+
+            if(na.first <= 0 || na.second <= 0)
+            {
+                h = nw.first;
+                a = nw.second;
+                current = NW;
+                continue;
+            }
+
+            if(current != 3){
+                current = 3;
+                h = h + 3;
+                a = a + 2;
+            }
+
+            else{
+                current = 2;
+                h=h-5;
+                a=a-10;
+            }
+
+
+        }
+
+        cout<<units<<endl;
+    }
+}
