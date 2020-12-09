@@ -1,0 +1,48 @@
+Question: https://www.spoj.com/problems/CHOCOLA/
+
+Solution: 
+TC - nlog(n)
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int t;
+    cin>>t;
+
+    while(t--){
+        int m,n;
+        cin>>m>>n;
+
+        int X[m],Y[n];
+        for(int i=0;i<m-1;i++)
+            cin>>X[i];
+        for(int i=0;i<n-1;i++)
+            cin>>Y[i];
+
+        sort(X,X+m-1);
+        sort(Y,Y+n-1);
+
+        int i=m-2,j=n-2;
+        int cx=1,cy=1;
+        int cost = 0;
+        while(i>=0 || j>=0)
+        {
+            if( i>=0 && (j<0 || X[i]>=Y[j]) )
+            {
+                cost = cost + (X[i]*cy);
+                i--;
+                cx++;
+            }else{
+                cost = cost + (Y[j]*cx);
+                j--;
+                cy++;
+            }
+        }
+
+        cout<<cost<<endl;
+    }
+    return 0;
+}
