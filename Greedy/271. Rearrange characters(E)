@@ -1,0 +1,55 @@
+Question: https://practice.geeksforgeeks.org/problems/rearrange-characters/0
+
+Solution: 
+TC - O(N^2)   Can be done in O(N)
+
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main() {
+	
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    string s;
+	    cin>>s;
+	    unordered_set <char> ch;
+	    
+	    for(ll i=0;i<s.length();i++)
+	        ch.insert(s[i]);
+	        
+	    
+	    ll max;
+	    if(s.length() % 2 == 0 )
+	        max = s.length() / 2;
+	   else
+	        max = (s.length()+1) / 2;
+	        
+	    unordered_set<char>::iterator it = ch.begin();
+	   
+        while (it != ch.end())
+        {
+            ll c=0;
+            for(ll i=0;i<s.length(); i++)
+            {
+                if(s[i] == *it)
+                    c++;
+            }
+            if(c>max)
+            {
+                cout<<0<<endl;
+                break;
+            }
+                
+            it++;
+        }
+        
+        if(it == ch.end())
+            cout<<1<<endl;
+	  
+	}
+	return 0;
+}
+
