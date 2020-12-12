@@ -1,0 +1,59 @@
+Question: https://practice.geeksforgeeks.org/problems/smallest-number5829/1
+
+Solution: 
+TC - O(N)
+
+
+#include<bits/stdc++.h>
+class Solution{   
+public:
+    string smallestNumber(int S, int D){
+        // code here 
+        int min=1,max=9*D;
+        
+        if(S<min || S>max)
+            return "-1";
+        else
+        {
+            int i=1;
+            string ans="";
+            while(S>0)
+            {
+            
+                if(S>=9)
+                {
+                    ans = ans + "9";
+                    S=S-9;
+                    i++;
+                }
+                else
+                {
+
+                    if(i==D)
+                    {
+                        stringstream ss;
+                        ss << S ;
+                        ans = ans + ss.str();
+                    }
+                    else
+                    {
+                        stringstream ss;
+                        ss << (S - 1);
+                        ans = ans + ss.str();
+                        
+                        for(int j=1;j<=(D-i-1);j++)
+                            ans = ans + "0";
+                        
+                        ans = ans + "1";
+                    }
+                    
+                    break;
+                }
+                   
+            }
+    
+            reverse(ans.begin(), ans.end()); 
+            return ans;
+        }
+    }
+};
