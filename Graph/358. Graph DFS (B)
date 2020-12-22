@@ -1,0 +1,13 @@
+void DFS (int x)
+    {
+        static int visited[5] = {0};
+
+        cout<<x<<" ";
+        visited[x]=1;
+
+        for(auto j: adj[x])
+        {
+            if(visited[j]==0)
+                DFS(j);
+        }
+    }
