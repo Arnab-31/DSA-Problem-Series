@@ -1,0 +1,30 @@
+Question: https://leetcode.com/problems/flood-fill/submissions/
+
+
+Solution: 
+
+class Solution {
+public:
+    
+    void floodFillAlgo(vector<vector<int>>& image, int sr, int sc, int newColor, int prevColor) {
+        
+        if(sr>=0 && sc>=0 && sr<image.size() && sc<image[0].size())   
+        {
+            if(image[sr][sc] == prevColor)
+            {
+                image[sr][sc] = newColor;
+                floodFillAlgo (image,sr+1,sc,newColor,prevColor);
+                floodFillAlgo (image,sr,sc+1,newColor,prevColor);
+                floodFillAlgo (image,sr-1,sc,newColor,prevColor);
+                floodFillAlgo (image,sr,sc-1,newColor,prevColor);
+            }
+        }
+    }
+    
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor){
+    
+        if(image[sr][sc]!=newColor)
+            floodFillAlgo (image,sr,sc,newColor,image[sr][sc]);
+        return image;
+    }
+};
