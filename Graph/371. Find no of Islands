@@ -1,0 +1,49 @@
+https://practice.geeksforgeeks.org/problems/find-the-number-of-islands/1
+
+Approach: The number of DFS reuqired to traverse through all 1s is the number of islands
+
+int visited[1000][1000]={0};
+
+class Solution {
+public:
+
+    void DFS(vector<vector<char>>& grid, int i, int j, int l1, int l2)
+    {
+        if(i< 0 || i>=l1 || j<0 || j>=l2 || visited[i][j]==1 || grid[i][j]=='0')
+            return ;
+       
+        visited[i][j]=1;
+        DFS(grid,i,j+1,l1,l2);
+        DFS(grid,i,j-1,l1,l2);
+        DFS(grid,i+1,j,l1,l2);
+        DFS(grid,i+1,j+1,l1,l2);
+        DFS(grid,i+1,j-1,l1,l2);
+        DFS(grid,i-1,j,l1,l2);
+        DFS(grid,i-1,j+1,l1,l2);
+        DFS(grid,i-1,j-1,l1,l2);
+    }
+    
+    int numIslands(vector<vector<char>>& grid) {
+        
+        int l1 = grid.size();
+        int l2 = grid[0].size();    
+        int islands = 0;
+        memset(visited, 0, sizeof visited);
+        
+        for(int i=0;i<l1;i++)
+        {
+            for(int j=0;j<l2;j++)
+            {
+                if(visited[i][j]==0 && grid[i][j]=='1')
+                {
+                    //cout<<i<<" "<<j<<endl;
+                    islands++;
+                    DFS(grid, i, j, l1, l2);
+                }
+            }
+        }
+        
+        return islands;
+    }
+};
+
