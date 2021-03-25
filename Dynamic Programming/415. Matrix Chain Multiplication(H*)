@@ -6,8 +6,12 @@ Youtube: https://www.youtube.com/watch?v=kMK148J9qEE&list=PL_z_8CaSLPWekqhdCPmFo
 
 using namespace std;
 
+int dp[1001][1001];
 int MatrixChainOrder(int arr[], int i, int j)
 {
+    if(dp[i][j]!=-1)
+        return dp[i][j];
+
     if(i>=j)
         return 0;
 
@@ -21,7 +25,7 @@ int MatrixChainOrder(int arr[], int i, int j)
             min=tempAns;
     }
 
-    return min;
+    return dp[i][j]=min;
 
 }
 int main()
@@ -29,6 +33,9 @@ int main()
     int arr[] = { 1, 2, 3, 4, 3 };
     int n = sizeof(arr) / sizeof(arr[0]);
 
+    memset(dp, -1, sizeof(dp));
+
     cout << "Minimum number of multiplications is "
          << MatrixChainOrder(arr, 1, n - 1);
 }
+
