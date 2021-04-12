@@ -1,0 +1,41 @@
+https://practice.geeksforgeeks.org/problems/word-break1352/1#
+
+
+Approach - Very simialr to MCM
+
+int dp[1001][1001];
+
+int solve (string A, vector<string> B, int i, int j)
+{
+    
+    if(dp[i][j] != -1)
+        return dp[i][j];
+    
+    string s = A.substr(i, j-i+1);
+    
+    vector<string>::iterator it;
+    it = find (B.begin(), B.end(), s);
+    
+    if(it != B.end())
+        return dp[i][j]=1;
+        
+        
+    for(int k=i+1;k<=j;k++)
+    {
+        int b1 = solve(A,B,i,k-1);
+        int b2 = solve(A,B,k,j);
+        
+        if(b1 == 1 && b2==1)
+            return dp[i][j]=1;
+    }
+
+    return dp[i][j]=0;
+}
+
+int wordBreak(string A, vector<string> &B) {
+    //code here
+    memset(dp, -1, sizeof dp);
+    return solve(A, B, 0, A.length()-1);
+      
+   
+}
