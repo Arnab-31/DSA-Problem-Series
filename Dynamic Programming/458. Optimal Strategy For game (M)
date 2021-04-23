@@ -1,0 +1,45 @@
+https://practice.geeksforgeeks.org/problems/optimal-strategy-for-a-game-1587115620/1#
+
+
+Approach: 
+There are two choices:
+The user chooses the ‘ith’ coin with value ‘Vi’: 
+The opponent either chooses (i+1)th coin or jth coin. 
+The opponent intends to choose the coin which leaves the user with minimum value.
+i.e. The user can collect the value Vi + min(F(i+2, j), F(i+1, j-1) ).
+The user chooses the ‘jth’ coin with value ‘Vj’: 
+The opponent either chooses ‘ith’ coin or ‘(j-1)th’ coin. 
+The opponent intends to choose the coin which leaves the user with minimum value, i.e. the user can collect the value Vj + min(F(i+1, j-1), F(i, j-2) ).
+
+
+
+long long maximumAmount(int arr[], int n) 
+{
+    // Your code here
+    int dp[n][n];
+    
+    for(int i=0;i<n;i++)
+    {
+        dp[i][i] = arr[i];
+    }
+        
+    for(int l=2;l<=n;l++)
+    {
+        for(int i=0;i<=n-l;i++)
+        {
+            int j = i+l-1;
+            if(l==2)
+            {
+                dp[i][j]=max(arr[i],arr[j]);
+               
+            }
+            else
+            {
+                dp[i][j] = max(arr[i] + min(dp[i+2][j], dp[i+1][j-1]), arr[j] + min(dp[i+1][j-1], dp[i][j-2]));
+            }
+        }
+    }
+    
+    return dp[0][n-1];
+    
+}
