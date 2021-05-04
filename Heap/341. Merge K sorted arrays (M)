@@ -1,0 +1,43 @@
+https://practice.geeksforgeeks.org/problems/merge-k-sorted-arrays/1
+
+Approach - enter the elements of each of the array sequentially into the heap, as they would alsways come in that order.So first enter all the first elements of all the arrays, 
+then once a elemnent is popped, insert the next element from the array to which the popped element belonged
+
+TC - k*k*log(n)
+
+typedef pair<int, int> pi;
+class Solution
+{
+    public:
+    //Function to merge k sorted arrays.
+    vector<int> mergeKArrays(vector<vector<int>> arr, int k)
+    {
+        //code here
+        vector <int> ans;
+          priority_queue<pi, vector<pi>, greater<pi> > h;
+        
+        for(int i=0;i<k;i++)
+            h.push(make_pair(arr[i][0],i));
+        
+        vector<int>index(k,0);
+        
+        while(!(ans.size()==(k*k))) 
+        {
+            int a = h.top().first;
+            int b = h.top().second;
+            
+            h.pop();
+            
+            ans.push_back(a);
+            
+            if(index[b]!=(k-1))
+            {
+                 index[b] = index[b] + 1;
+                 h.push(make_pair(arr[b][index[b]],b));
+            }
+        }
+        
+      
+        return ans;
+    }
+};
