@@ -1,0 +1,57 @@
+https://practice.geeksforgeeks.org/problems/is-binary-tree-heap/1#
+
+
+Approach - First check if tree is compelete then check if the ordering of nodes are correct
+TC - O(n)
+
+bool isComplete ( Node* root, unsigned int index,
+                    unsigned int number_nodes)
+{
+    // An empty tree is complete
+    if (root == NULL)
+        return (true);
+ 
+    // If index assigned to current node is more than
+    // number of nodes in tree, then tree is not complete
+    if (index >= number_nodes)
+        return (false);
+ 
+    // Recur for left and right subtrees
+    return (isComplete(root->left, 2*index + 1, number_nodes) &&
+            isComplete(root->right, 2*index + 2, number_nodes));
+}
+
+unsigned int countNodes(Node* root)
+{
+    if (root == NULL)
+        return (0);
+    return (1 + countNodes(root->left) +
+            countNodes(root->right));
+}
+
+class Solution {
+  public:
+    bool isHeap(struct Node * tree)
+    {
+        // code here
+              
+        if(!tree || (!tree->left && !tree->right))
+            return true;
+       
+       
+         unsigned int node_count = countNodes(tree);
+        if(!isComplete(tree, 0, node_count))
+            return false;
+      
+            
+        if(tree -> left)
+            if(!(tree -> data > tree -> left -> data))
+                return false;
+        if(tree -> right)
+            if(!(tree -> data > tree -> right -> data))
+                return false;
+            
+        return isHeap(tree -> left) && isHeap(tree -> right);
+    
+    }
+};
