@@ -1,0 +1,21 @@
+https://practice.geeksforgeeks.org/problems/cyclically-rotate-an-array-by-one2614/1#
+
+
+TC - O(n)
+SC - O(1)
+
+
+
+void rotate(int arr[], int n)
+{
+    int a = arr[n-1];
+    int c = arr[0];
+    for(int i=1;i<n;i++)
+    {
+        int d = arr[i];
+        arr[i] = c;
+        c = d;
+    }
+    
+    arr[0] = a;
+}
