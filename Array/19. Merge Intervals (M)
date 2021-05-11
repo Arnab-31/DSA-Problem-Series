@@ -1,0 +1,58 @@
+https://leetcode.com/problems/find-the-duplicate-number/solution/
+
+
+Approach - sort the intervals by their start value, then each set of intervals that can be merged will appear as a contiguous "run" in the sorted list.
+TC - O(nlogn)
+SC - O(n)
+
+
+
+class Solution {
+public:
+    bool static compareInterval(vector<int>a, vector<int>b)
+    {
+        return (a[0] < b[0]);
+    }
+    
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        
+        sort(intervals.begin(), intervals.end(), compareInterval);
+        
+        for(int i =0;i<intervals.size();i++)
+        {
+            cout<<intervals[i][0]<<" "<<intervals[i][1]<<endl;
+        }
+        
+        int a = intervals[0][0];
+        vector<vector<int>> ans;
+        int max = intervals[0][1];
+        for(int i=1;i<intervals.size();i++)
+        {
+            if(intervals[i][0] > max)
+            {
+                int b;
+                vector <int> v;
+                v.push_back(a);
+                v.push_back(max);
+                ans.push_back(v);
+                
+                a = intervals[i][0];
+            }
+            
+            if(max < intervals[i][1])
+            {
+                max = intervals[i][1];
+                cout<<max<<endl;
+            }
+                
+        }
+        
+        vector <int> v;
+        v.push_back(a);
+        v.push_back(max);
+        ans.push_back(v);
+        
+        
+        return ans;
+    }
+};
