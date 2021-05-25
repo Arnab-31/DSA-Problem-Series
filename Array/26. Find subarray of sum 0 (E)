@@ -1,0 +1,31 @@
+https://practice.geeksforgeeks.org/problems/subarray-with-0-sum-1587115621/1
+
+
+class Solution{
+    public:
+    //Complete this function
+    //Function to check whether there is a subarray present with 0-sum or not.
+    bool subArrayExists(int arr[], int n)
+    {
+        //Your code here
+        int sum[n];
+        unordered_set<int>s;
+        
+        sum[0] = arr[0];
+        s.insert(sum[0]);
+        
+        for(int i=1;i<n;i++)
+        {
+            sum[i] = arr[i] + sum[i-1];
+            if(s.find(sum[i]) == s.end() && sum[i]!=0)
+                s.insert(sum[i]);
+            else
+                return true;
+        }
+        
+        
+        return false;
+    }
+};
+
+
