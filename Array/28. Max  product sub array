@@ -1,0 +1,50 @@
+https://practice.geeksforgeeks.org/problems/maximum-product-subarray3604/1
+
+
+Approach - Keep multiplying the numbers, keep track when the sum bacame negative after the last zero. Update sum to 1 when a zero is reached. Keep updating the maxsum 
+
+TC - O(N)
+SC - O(1)
+
+
+class Solution{
+public:
+
+	// Function to find maximum product subarray
+	long long maxProduct(int *arr, int n) {
+	    // code here\
+	    
+	    long long max=INT_MIN,curProd=1,a=1;
+	    int flag=1;
+	    for(int i=0;i<n;i++)
+	    {
+	        curProd = curProd * *arr;
+	        
+	        if(curProd > max)
+	            max=curProd;
+	        
+          //if currentProduct is negative, then we need to check if positive sum is more than max
+	        if((curProd/a)  >  max)
+	            max = curProd/a;
+	        
+          //store the sun in a when the product becoemes negative the first time
+	        if(*arr < 0 && flag==1)
+	        {
+	            a = curProd;
+	            flag=0;
+	        }
+	        
+	        if(curProd == 0)
+	        {   
+	            a = 1;
+	            curProd = 1;
+	            flag=1;
+	        }
+	            
+	        arr++;
+	       
+	    }
+
+	    return max;
+	}
+};
