@@ -1,0 +1,40 @@
+https://practice.geeksforgeeks.org/problems/count-the-reversals0401/1
+
+Approach - traverse string, at any point if closing bracket is greater than opening bracket, we have to reverse it, when a two brackets are balanced  remove it, 
+if at the end, number of remaining brackets is odd, then it is not possible, if it is even, reverse half of them
+
+
+TC - O(n)
+SC - O(1)
+
+int countRev (string s)
+{
+    // your code here
+    int count=0;
+    int left=0;
+    int right = 0;
+    
+    for(int i=0;i<s.length();i++)
+    {
+        if(s[i]=='{')
+        {
+            left++;
+        }
+        else
+        {
+            if(left>0)
+                left--;
+            else
+            {
+                left++;
+                count++;
+            }
+        }
+    }
+    
+    if(left%2 !=0)
+        return -1;
+    else
+        return count + left/2;
+    
+}
