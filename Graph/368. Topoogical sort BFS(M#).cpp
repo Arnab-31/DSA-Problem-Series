@@ -20,7 +20,7 @@ public:
 	        }
 	    }
 	    vector<int> topo
-	    while(!q.empty()) {   //start BF with the nodes of indegree 0
+	    while(!q.empty()) {   //start BFS with the nodes of indegree 0
 	        int node = q.front(); 
 	        q.pop(); 
 	        topo.push_back(node)
