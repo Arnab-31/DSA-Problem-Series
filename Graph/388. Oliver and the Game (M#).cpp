@@ -62,13 +62,13 @@ int32_t main() {
             continue;
         }
         if(type==0){
-            if(check(y,x))
+            if(check(y,x))    // check if y is in subtree of x
                 cout<<"YES\n";
             else 
                 cout<<"NO\n";
         }
         else if(type==1){
-            if(check(x,y))
+            if(check(x,y))    // check if x is in subtree of y
                 cout<<"YES\n";
             else
                 cout<<"NO\n";
