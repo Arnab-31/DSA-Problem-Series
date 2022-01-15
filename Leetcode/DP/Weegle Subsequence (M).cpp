@@ -17,7 +17,7 @@ th
 class Solution {
 public:
     int wiggleMaxLength(vector<int>& a) {
-        int n = a.size(), ans = 1;
+        int n = a.size(), ans = 1; 
         if(n == 0) return 0;
         vector<int> dp1(n,1), dp2(n,1);
         for(int i = 1 ; i < n ; i++) {
