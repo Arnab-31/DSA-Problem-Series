@@ -77,3 +77,36 @@ int main()
 }
 
 // This code is contributed by shivanisinghss2110
+
+
+
+//Code written by me
+
+class Solution {
+	public:
+		int AlternatingaMaxLength(vector<int>&nums){
+		    // Code here
+		    int n = nums.size();
+		    int dp[n][2];
+		    dp[0][0] = 1;
+		    dp[0][1] = 1;
+		    
+		    int ans = 1;
+		    for(int i=1;i<=n-1;i++){
+		        dp[i][1] = dp[i-1][1];
+		        dp[i][0] = dp[i-1][0];
+		        if(nums[i] < nums[i-1]){
+		            dp[i][0] = 1 + dp[i-1][1];
+		            dp[i][1] = dp[i-1][1];
+		        }else if(nums[i] > nums[i-1]){
+		            dp[i][1] = 1 + dp[i-1][0];
+		            dp[i][0] = dp[i-1][0];
+		        }
+		        //cout<<dp[i][0]<<" "<<dp[i][1]<<endl;
+		        ans = max({ans, dp[i][1], dp[i][0]});
+		    }
+		    
+		    return ans;
+		}
+
+};
